@@ -1,8 +1,18 @@
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="Current">
+  <PropertyGroup>
+    <RootNamespace>BatteryManagementSystem</RootNamespace>
+  </PropertyGroup>
   <ItemGroup>
-    <Compile Include="checker.cs"/>
+    <Compile Include="checker.cs" />
+    <Compile Include="BatteryMonitor.cs" />
+    <Compile Include="ChargeRateValidator.cs" />
+    <Compile Include="IValidator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StateOfChargeValidator.cs" />
+    <Compile Include="TemperatureValidator.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Target Name="Build">
-    <Csc Sources="@(Compile)"/>  
+    <Csc Sources="@(Compile)" />  
   </Target>
 </Project>
