@@ -27,7 +27,7 @@ namespace BatteryManagementSystem
             if (result == 0)
             {
                 PrintMessage("Please enter valid input");
-                Environment.ExitCode(0);
+                Environment.Exit(0);
             }
             Language.SetLanguageCode(result);
             Language.LoadResource();
@@ -48,7 +48,7 @@ namespace BatteryManagementSystem
             if (result == 0)
             {
                 PrintMessage(Language.GetString(Language.InvalidInputMessage));
-                Environment.ExitCode(0);
+                Environment.Exit(0);
             }
 
             return GetTemperatureValue(result);
@@ -61,7 +61,7 @@ namespace BatteryManagementSystem
             if (result == 0)
             {
                 PrintMessage(Language.GetString(Language.InvalidInputMessage));
-                Environment.ExitCode(0);
+                Environment.Exit(0);
             }
             if (unitType == 2)
             {
@@ -77,7 +77,7 @@ namespace BatteryManagementSystem
             if (result == 0)
             {
                 PrintMessage(Language.GetString(Language.InvalidInputMessage));
-                Environment.ExitCode(0);
+                Environment.Exit(0);
             }
 
             return result;
@@ -89,7 +89,7 @@ namespace BatteryManagementSystem
             if (result == 0)
             {
                 PrintMessage(Language.GetString(Language.InvalidInputMessage));
-                Environment.ExitCode(0);
+                Environment.Exit(0);
             }
 
             return result;
