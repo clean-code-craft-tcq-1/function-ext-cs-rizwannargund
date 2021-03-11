@@ -8,7 +8,7 @@ namespace BatteryManagementSystem
         {
             Range range = BatteryRangeLevel.Temperature.Keys.FirstOrDefault(x => x.InRange(batteryStateControl.Temperature));
             if(range != null)
-                return BatteryRangeLevel.Temperature[range];
+                return Language.GetString(BatteryRangeLevel.Temperature[range]);
             else
             {
                 return "No message found!";
