@@ -9,7 +9,7 @@ namespace BatteryManagementSystem
         {
             Range range = BatteryRangeLevel.ChargeRate.Keys.FirstOrDefault(x => x.InRange(batteryStateControl.ChargeRate));
             if (range != null)
-                return BatteryRangeLevel.ChargeRate[range];
+                return Language.GetString(BatteryRangeLevel.ChargeRate[range]);
             else
             {
                 return "No message found!";
