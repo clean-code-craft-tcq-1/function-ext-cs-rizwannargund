@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+﻿using System.Globalization;
 using System.Reflection;
 using System.Resources;
-using System.Text;
 
 namespace BatteryManagementSystem
 {
@@ -33,7 +29,7 @@ namespace BatteryManagementSystem
         public const string HighTempBreach = "HIGH_TEMP_BREACH";
         public const string NormalChargeRate = "NORMAL_CHARGERATE";
         public const string HighChargeRateWarning = "HIGH_CHARGERATE_WARNING";
-        public const string HighChargeRateBreach= "HIGH_CHARGERATE_BREACH";
+        public const string HighChargeRateBreach = "HIGH_CHARGERATE_BREACH";
 
         public static void SetLanguageCode(int languageId)
         {

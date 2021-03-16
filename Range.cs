@@ -1,5 +1,4 @@
-﻿
-namespace BatteryManagementSystem
+﻿namespace BatteryManagementSystem
 {
     public class Range
     {
@@ -13,15 +12,7 @@ namespace BatteryManagementSystem
         }
 
         public bool InRange(float value)
-        {
-            if (value >= From && value <= To)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+            => (value >= From && value <= To);
+
     }
 }

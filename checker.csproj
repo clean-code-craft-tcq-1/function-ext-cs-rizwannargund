@@ -4,35 +4,22 @@
     <ProjectGuid>{E20B02BB-2FDB-4317-B44D-F677B046B8AC}</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="checker.cs" />
+    <Compile Include="BatteryRangeLevels.cs" />
     <Compile Include="BatteryStateControl.cs" />
-    <Compile Include="ChargeRateValidator.cs" />
-    <Compile Include="de-DE.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>de-DE.resx</DependentUpon>
-    </Compile>
-    <Compile Include="en-US.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>en-US.resx</DependentUpon>
-    </Compile>
+    <Compile Include="checker.cs" />
+    <Compile Include="BatteryRangeValidator.cs" />
+    <Compile Include="de-DE.Designer.cs" />
+    <Compile Include="en-US.Designer.cs" />
+    <Compile Include="ILogger.cs" />
+    <Compile Include="IValidator.cs" />
     <Compile Include="Language.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Range.cs" />
-    <Compile Include="BatteryRangeLevel.cs" />
-    <Compile Include="StateOfChargeValidator.cs" />
-    <Compile Include="TemperatureValidator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="de-DE.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>de-DE.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="en-US.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>en-US.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <EmbeddedResource Include="de-DE.resx" />
+    <EmbeddedResource Include="en-US.resx" />
   </ItemGroup>
   <Target Name="Build">
     <Csc Sources="@(Compile)" />  
