@@ -5,14 +5,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="checker.cs" />
-	<Compile Include="BatteryRangeLevels.cs" />
+	<Compile Include="ChargeRateValidator.cs" />
+    <Compile Include="BatteryRangeLevels.cs" />
     <Compile Include="BatteryStateControl.cs" />
-    <Compile Include="BatteryRangeValidator.cs" />
     <Compile Include="de-DE.Designer.cs" />
     <Compile Include="en-US.Designer.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="IValidator.cs" />
-    <Compile Include="Language.cs" />
+    <Compile Include="MockConsoleLogger.cs" />
+    <Compile Include="SocValidator.cs" />
+    <Compile Include="TemperatureValidator.cs" />
+    <Compile Include="ResourceHelper.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Range.cs" />

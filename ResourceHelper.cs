@@ -1,13 +1,15 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Reflection;
 using System.Resources;
 
 namespace BatteryManagementSystem
 {
-    public class Language
+    public class ResourceHelper
     {
-        private static ResourceManager _resourceManager = new ResourceManager(string.Format("checker.{0}.resx", "en-US"),
-            Assembly.GetExecutingAssembly());
+        private static Dictionary<int, string> _languageCodeMapper;
+
+        private static ResourceManager _resourceManager;
 
         private static string _languageCode = "en-US";
         public const string TemperatureUnitInput = "TemperatureUnitInput";
@@ -31,26 +33,28 @@ namespace BatteryManagementSystem
         public const string HighChargeRateWarning = "HIGH_CHARGERATE_WARNING";
         public const string HighChargeRateBreach = "HIGH_CHARGERATE_BREACH";
 
-        public static void SetLanguageCode(int languageId)
+        public ResourceHelper()
         {
-            switch (languageId)
-            {
-                case 2:
-                    _languageCode = "de-DE";
-                    break;
-                default:
-                    _languageCode = "en-US";
-                    break;
-            }
+            _languageCodeMapper = new Dictionary<int, string>();
+            _languageCodeMapper.Add(1, "en-US");
+            _languageCodeMapper.Add(2, "de-DE");
+            _resourceManager = new ResourceManager(string.Format("checker.{0}.resx", "en-US"),
+                Assembly.GetExecutingAssembly());
         }
 
-        public static void LoadResource()
+        public void SetLanguageCode(int languageId)
+        {
+            if (_languageCodeMapper.ContainsKey(languageId))
+                _languageCode = _languageCodeMapper[languageId];
+        }
+
+        public void LoadResource()
         {
             _resourceManager = new ResourceManager(string.Format("checker.{0}.resx", _languageCode),
                 Assembly.GetExecutingAssembly());
         }
 
-        public static string GetString(string key)
+        public string GetString(string key)
         {
             return _resourceManager.GetString(key, CultureInfo.InvariantCulture);
         }

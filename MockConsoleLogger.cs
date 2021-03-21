@@ -1,9 +1,8 @@
-﻿
-using System;
+﻿using System;
 
 namespace BatteryManagementSystem
 {
-    public class Logger : ILogger
+    public class MockConsoleLogger : ILogger
     {
         public void Log(string message)
         {

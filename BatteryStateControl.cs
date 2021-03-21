@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace BatteryManagementSystem
 {
     public class BatteryStateControl
@@ -18,13 +14,16 @@ namespace BatteryManagementSystem
             ChargeRate = chargeRate;
         }
 
-        public void GetBatteryState()
+        public void GetBatteryState(ILogger logger)
         {
-            ILogger logger = new Logger();
-            BatteryRangeValidator batteryRangeValidator = new BatteryRangeValidator(logger);
-            batteryRangeValidator.ValidateTemperatureState(this.Temperature);
-            batteryRangeValidator.ValidateSocState(this.StateOfCharge);
-            batteryRangeValidator.ValidateChargeRateState(this.ChargeRate);
+            TemperatureValidator temperatureValidator = new TemperatureValidator(logger);
+            temperatureValidator.RangeValidate(this.Temperature);
+
+            SocValidator socValidator = new SocValidator(logger);
+            socValidator.RangeValidate(this.StateOfCharge);
+
+            ChargeRateValidator chargeRateValidator = new ChargeRateValidator(logger);
+            chargeRateValidator.RangeValidate(this.ChargeRate);
         }
     }
 }
