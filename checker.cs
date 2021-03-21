@@ -1,38 +1,113 @@
 using System;
 using System.Diagnostics;
 
-class Checker
+namespace BatteryManagementSystem
 {
-    static bool batteryIsOk(float temperature, float soc, float chargeRate) {
-        if(temperature < 0 || temperature > 45) {
-            Console.WriteLine("Temperature is out of range!");
-            return false;
-        } else if(soc < 20 || soc > 80) {
-            Console.WriteLine("State of Charge is out of range!");
-            return false;
-        } else if(chargeRate > 0.8) {
-            Console.WriteLine("Charge Rate is out of range!");
-            return false;
+    public class BatteryStateChecker
+    {
+        static ILogger _logger = new MockConsoleLogger();
+        static ResourceHelper _userLanguage = new ResourceHelper();
+        static void SetLanguage()
+        {
+            _logger.Log("Please choose one of the language");
+            _logger.Log("1. English");
+            _logger.Log("2. German");
+            int.TryParse(Console.ReadLine(), out int result);
+            if (result == 0)
+            {
+                _logger.Log("Please enter valid input");
+                Environment.Exit(0);
+            }
+            _userLanguage.SetLanguageCode(result);
+            _userLanguage.LoadResource();
         }
-        return true;
-    }
 
-    static void ExpectTrue(bool expression) {
-        if(!expression) {
-            Console.WriteLine("Expected true, but got false");
-            Environment.Exit(1);
+
+        #region Inputs
+        static float GetTemperatureUnitWithValue()
+        {
+            _logger.Log(_userLanguage.GetString(ResourceHelper.TemperatureUnitInput));
+            _logger.Log(_userLanguage.GetString(ResourceHelper.TemperatureUnitInput1));
+            _logger.Log(_userLanguage.GetString(ResourceHelper.TemperatureUnitInput2));
+            int.TryParse(Console.ReadLine(), out int result);
+            if (result == 0)
+            {
+                _logger.Log(_userLanguage.GetString(ResourceHelper.InvalidInputMessage));
+                Environment.Exit(0);
+            }
+
+            return GetTemperatureValue(result);
         }
-    }
-    static void ExpectFalse(bool expression) {
-        if(expression) {
-            Console.WriteLine("Expected false, but got true");
-            Environment.Exit(1);
+
+        static float GetTemperatureValue(int unitType)
+        {
+            _logger.Log(_userLanguage.GetString(ResourceHelper.TemperatureValue));
+            float.TryParse(Console.ReadLine(), out float result);
+            if (result == 0)
+            {
+                _logger.Log(_userLanguage.GetString(ResourceHelper.InvalidInputMessage));
+                Environment.Exit(0);
+            }
+            if (unitType == 2)
+            {
+                result = ((5 / 9) * (result - 32));
+            }
+
+            return result;
         }
-    }
-    static int Main() {
-        ExpectTrue(batteryIsOk(25, 70, 0.7f));
-        ExpectFalse(batteryIsOk(50, 85, 0.0f));
-        Console.WriteLine("All ok");
-        return 0;
+        static float GetSocValue()
+        {
+            _logger.Log(_userLanguage.GetString(ResourceHelper.SocValue));
+            float.TryParse(Console.ReadLine(), out float result);
+            if (result == 0)
+            {
+                _logger.Log(_userLanguage.GetString(ResourceHelper.InvalidInputMessage));
+                Environment.Exit(0);
+            }
+
+            return result;
+        }
+        static float GetChargeRateValue()
+        {
+            _logger.Log(_userLanguage.GetString(ResourceHelper.ChargeRateValue));
+            float.TryParse(Console.ReadLine(), out float result);
+            if (result == 0)
+            {
+                _logger.Log(_userLanguage.GetString(ResourceHelper.InvalidInputMessage));
+                Environment.Exit(0);
+            }
+
+            return result;
+        }
+        #endregion
+
+        static int Main()
+        {
+            SetLanguage();
+            float temperature = GetTemperatureUnitWithValue();
+            float soc = GetSocValue();
+            float chargeRate = GetChargeRateValue();
+
+            Debug.Assert(!temperature.Equals(null), "Invalid temperature input");
+            Debug.Assert(!soc.Equals(null), "Invalid state of charge input");
+            Debug.Assert(!chargeRate.Equals(null), "Invalid charge rate input");
+
+            BatteryStateControl batteryStateControl = new BatteryStateControl(temperature, soc, chargeRate);
+            batteryStateControl.GetBatteryState(new MockConsoleLogger());
+            Debug.Assert(!batteryStateControl.Temperature.Equals(null), "Temperature is not set.");
+            Debug.Assert(!batteryStateControl.StateOfCharge.Equals(null), "State of charge is not set.");
+            Debug.Assert(!batteryStateControl.ChargeRate.Equals(null), "Charge rate is not set");
+            try
+            {
+                batteryStateControl?.GetBatteryState(new MockConsoleLogger());
+            }
+            catch (Exception e)
+            {
+                Debug.Assert(false, "Failed to get battery state." + e.Message);
+            }
+
+            Console.WriteLine("All ok");
+            return 0;
+        }
     }
 }

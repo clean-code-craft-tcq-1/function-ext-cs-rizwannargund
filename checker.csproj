@@ -1,8 +1,30 @@
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="Current">
+  <PropertyGroup>
+    <RootNamespace>BatteryManagementSystem</RootNamespace>
+    <ProjectGuid>{E20B02BB-2FDB-4317-B44D-F677B046B8AC}</ProjectGuid>
+  </PropertyGroup>
   <ItemGroup>
-    <Compile Include="checker.cs"/>
+    <Compile Include="checker.cs" />
+    <Compile Include="ChargeRateValidator.cs" />
+    <Compile Include="BatteryRangeLevels.cs" />
+    <Compile Include="BatteryStateControl.cs" />
+    <Compile Include="de-DE.Designer.cs" />
+    <Compile Include="en-US.Designer.cs" />
+    <Compile Include="ILogger.cs" />
+    <Compile Include="IRangeValidator.cs" />
+    <Compile Include="MockConsoleLogger.cs" />
+    <Compile Include="SocValidator.cs" />
+    <Compile Include="TemperatureValidator.cs" />
+    <Compile Include="ResourceHelper.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Range.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="de-DE.resx" />
+    <EmbeddedResource Include="en-US.resx" />
   </ItemGroup>
   <Target Name="Build">
-    <Csc Sources="@(Compile)"/>  
+    <Csc Sources="@(Compile)" />  
   </Target>
 </Project>
